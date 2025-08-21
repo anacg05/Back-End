@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.generics import ListCreateAPIView
-from .models import Autor
-from .serializers import AutorSerializers
+from .models import Autor, Editora, Livro
+from .serializers import AutorSerializers, EditoraSerializers, LivroSerializers
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -11,6 +11,7 @@ class AutoresView(ListCreateAPIView):
 
     queryset = Autor.objects.all()  # set pega get envia  
     serializer_class = AutorSerializers
+
 
 @api_view(['GET', 'POST'])
 def visu_autor(request):
@@ -29,3 +30,12 @@ def visu_autor(request):
         
         else:
             return Response(serializer.data, status=status.HTTP_400_BAD_REQUEST)
+        
+class EditorasView(ListCreateAPIView):
+    queryset = Editora.objects.all()
+    serializer_class = EditoraSerializers
+
+
+class LivrosView(ListCreateAPIView):
+    queryset = Livro.objects.all()
+    serializer_class = LivroSerializers
