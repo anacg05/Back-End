@@ -1,7 +1,7 @@
 import pandas as pd
 from django.core.management.base import BaseCommand
 from django.db import transaction
-from api.models import Livro
+from api.models import Livro, Autor, Editora
 
 class Command(BaseCommand):
     def add_arguments(self, parser):
@@ -31,6 +31,7 @@ class Command(BaseCommand):
         df["disponivel"] = df["disponivel"].map({"True": True, "False": False})
         df["dimensoes"] = df["dimensoes"].astype(str).str.strip()
         df["peso"] = pd.to_numeric(df["peso"], errors= "coerce", downcast="integer")
+
 
 
 
